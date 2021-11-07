@@ -1,5 +1,5 @@
 # Calculator Project Setup
-[![Build Status](https://app.travis-ci.com/kaw393939/calc2.svg?branch=main)](https://app.travis-ci.com/kaw393939/calc2)
+[![Build Status](https://app.travis-ci.com/jameson-m/njit-is601-calc1.svg?branch=main)](https://app.travis-ci.com/jameson-m/njit-is601-calc1)
 
 Run Pip Install
 pip install -r requirements.txt
