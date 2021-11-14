@@ -2,6 +2,7 @@
 Class representing a calculator.
 """
 from calc.addition import Addition
+from calc.multiplication import Multiplication
 from calc.subtraction import Subtraction
 
 
@@ -92,19 +93,21 @@ class Calculator:
         Calculator.add_calculation_to_history(subtraction)
         return Calculator.get_last_calculation()
 
-    def multiply(self, value_a, value_b):
+    @staticmethod
+    def multiply(value_a, value_b):
         """
-        Multiplies two numbers together and stores the new value in result.
+        Multiplies two numbers together.
 
         Args:
-            value_a (float): First value in multiplication
-            value_b (float): Second value in multiplication
+            value_a (int): First value
+            value_b (int): Second value to be multiplied on the second
 
         Returns:
-            float: Result of multiplication of two given numbers
+            Calculation: The created multiplication calculation object
         """
-        self.result = value_a * value_b
-        return self.result
+        multiplication = Multiplication.create(value_a, value_b)
+        Calculator.add_calculation_to_history(multiplication)
+        return Calculator.get_last_calculation()
 
     def divide(self, value_a, value_b):
         """
