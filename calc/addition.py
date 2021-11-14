@@ -1,8 +1,9 @@
 from calc.calculation import Calculation
 
 class Addition(Calculation):
-    """Adds two numbers together and returns result.
+    """Addition class.
     """
+    
     def get_result(self):
         """Adds two numbers together and returns result.
 
