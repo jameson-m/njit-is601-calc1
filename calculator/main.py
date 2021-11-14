@@ -2,6 +2,7 @@
 Class representing a calculator.
 """
 from calc.addition import Addition
+from calc.subtraction import Subtraction
 
 
 class Calculator:
@@ -59,42 +60,37 @@ class Calculator:
     def count_history():
         return len(Calculator.history)
     
-
-
-    def get_result(self):
+    @staticmethod
+    def add(value_a, value_b):
         """
-        Get stored result value.
-
-        Returns:
-            float: stored result of calculations
-        """
-        return self.result
-
-    def add(self, value_a):
-        """
-        Adds a number to the current result.
+        Adds two numbers together.
 
         Args:
-            value_a (float): Value to add to the current result
+            value_a (int): First value
+            value_b (int): Second value to be added to first
 
         Returns:
-            float: Value of result after addition
+            Calculation: The created addition calculation object
         """
-        self.result = self.result + value_a
-        return self.result
+        addition = Addition.create(value_a, value_b)
+        Calculator.add_calculation_to_history(addition)
+        return Calculator.get_last_calculation()
 
-    def subtract(self, value_a):
+    @staticmethod
+    def subtract(value_a, value_b):
         """
-        Subtracts a number from the current result.
+        Subtracts one number from another.
 
         Args:
-            value_a (float): Value to subtract from the current result
+            value_a (int): First value
+            value_b (int): Second value subtracted from first
 
         Returns:
-            float: Value of the result after subtraction
+            Calculation: The created subtraction calculation object
         """
-        self.result = self.result - value_a
-        return self.result
+        subtraction = Subtraction.create(value_a, value_b)
+        Calculator.add_calculation_to_history(subtraction)
+        return Calculator.get_last_calculation()
 
     def multiply(self, value_a, value_b):
         """
