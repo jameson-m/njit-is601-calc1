@@ -1,11 +1,65 @@
 """
 Class representing a calculator.
 """
+from calc.addition import Addition
+
+
 class Calculator:
     """Calculator class
     """
+    history = []
 
-    result = 0
+    # [x] get history
+    # [x] get last calculation
+    # [x] get first calculation
+    # [x] add calculation to history
+    # [x] get last calculation result
+    # [x] get last calculation object
+    # [x] clear history
+    # [x] count history
+    # [] addition
+    # [] subtraction
+    # [] multiplication
+    # [] division
+
+    @staticmethod
+    def get_history():
+        return Calculator.history
+
+    @staticmethod
+    def get_last_calculation():
+        last_index = len(Calculator.history) - 1
+        return Calculator.history[last_index]
+    
+    @staticmethod
+    def get_first_calculation():
+        return Calculator.history[0]
+    
+    @staticmethod
+    def add_calculation_to_history(calculation):
+        Calculator.history.append(calculation)
+        return True
+    
+    @staticmethod
+    def get_last_calculation_result():
+        last_index = len(Calculator.history) - 1
+        return Calculator.history[last_index].get_result()
+
+    @staticmethod
+    def get_last_calculation():
+        last_index = len(Calculator.history) - 1
+        return Calculator.history[last_index]
+    
+    @staticmethod
+    def clear_history():
+        Calculator.history.clear()
+        return True
+    
+    @staticmethod
+    def count_history():
+        return len(Calculator.history)
+    
+
 
     def get_result(self):
         """
