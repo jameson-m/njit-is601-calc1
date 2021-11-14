@@ -2,6 +2,7 @@
 Class representing a calculator.
 """
 from calc.addition import Addition
+from calc.division import Division
 from calc.multiplication import Multiplication
 from calc.subtraction import Subtraction
 
@@ -10,19 +11,6 @@ class Calculator:
     """Calculator class
     """
     history = []
-
-    # [x] get history
-    # [x] get last calculation
-    # [x] get first calculation
-    # [x] add calculation to history
-    # [x] get last calculation result
-    # [x] get last calculation object
-    # [x] clear history
-    # [x] count history
-    # [] addition
-    # [] subtraction
-    # [] multiplication
-    # [] division
 
     @staticmethod
     def get_history():
@@ -109,21 +97,19 @@ class Calculator:
         Calculator.add_calculation_to_history(multiplication)
         return Calculator.get_last_calculation()
 
+    @staticmethod
     def divide(self, value_a, value_b):
         """
-        Divides two numbers together and stores the new value in result.
+        Divides two numbers together.
         If dividing by zero the result is 0.
 
         Args:
-            value_a (float): First value in division
-            value_b (float): Second value in division
+            value_a (int): Numerator
+            value_b (int): Divisor
 
         Returns:
             float: Result of division of two given numbers
         """
-        try:
-            self.result = value_a / value_b
-            return self.result
-        except ZeroDivisionError:
-            self.result = 0
-            return self.result
+        division = Division.create(value_a, value_b)
+        Calculator.add_calculation_to_history(division)
+        return Calculator.get_last_calculation()
