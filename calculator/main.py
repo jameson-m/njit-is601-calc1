@@ -6,49 +6,80 @@ from calc.division import Division
 from calc.multiplication import Multiplication
 from calc.subtraction import Subtraction
 
-
 class Calculator:
-    """Calculator class
-    """
+    """Calculator class"""
     history = []
 
     @staticmethod
     def get_history():
+        """Get full calculator history.
+
+        Returns:
+            list: List of Calculation objects
+        """
         return Calculator.history
 
     @staticmethod
     def get_last_calculation():
+        """Get the last Calculation object in history (most recent).
+
+        Returns:
+            Calculation: Most recent Calculation
+        """
         last_index = len(Calculator.history) - 1
         return Calculator.history[last_index]
-    
+
     @staticmethod
     def get_first_calculation():
+        """Get the first Calculation object in history.
+
+        Returns:
+            Calculation: First Calculation performed
+        """
         return Calculator.history[0]
-    
+
     @staticmethod
     def add_calculation_to_history(calculation):
+        """Add a Calculation object to the calculator's history.
+
+        Args:
+            calculation (Calculation): Calculation object to add to history
+
+        Returns:
+            bool: Whether or not adding to history was success
+        """
         Calculator.history.append(calculation)
         return True
-    
+
     @staticmethod
     def get_last_calculation_result():
+        """Get the last Calculation object's result.
+
+        Returns:
+            int: Most recent Calculation's result
+        """
         last_index = len(Calculator.history) - 1
         return Calculator.history[last_index].get_result()
 
     @staticmethod
-    def get_last_calculation():
-        last_index = len(Calculator.history) - 1
-        return Calculator.history[last_index]
-    
-    @staticmethod
     def clear_history():
+        """Clears the calculator's history.
+
+        Returns:
+            bool: If calculator's history was successfully cleared
+        """
         Calculator.history.clear()
         return True
-    
+
     @staticmethod
     def count_history():
+        """Counts the number of items in the calculator's history.
+
+        Returns:
+            int: Number of items in calculator's history
+        """
         return len(Calculator.history)
-    
+
     @staticmethod
     def add(value_a, value_b):
         """
@@ -98,7 +129,7 @@ class Calculator:
         return Calculator.get_last_calculation()
 
     @staticmethod
-    def divide(self, value_a, value_b):
+    def divide(value_a, value_b):
         """
         Divides two numbers together.
         If dividing by zero the result is 0.

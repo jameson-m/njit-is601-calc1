@@ -1,9 +1,10 @@
+"""Multiplication subclass"""
 from calc.calculation import Calculation
 
 class Multiplication(Calculation):
     """Multiplication class.
     """
-    
+
     def get_result(self):
         """Multiplies two numbers and returns result.
 

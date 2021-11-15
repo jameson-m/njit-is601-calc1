@@ -1,8 +1,11 @@
+"""Division subclass"""
 from calc.calculation import Calculation
 
 class Division(Calculation):
+    """Division class"""
     def get_result(self):
-        """Divides one number from another and returns result. First number is numerator, second number is denominator.
+        """Divides one number from another and returns result.
+        First number is numerator, second number is denominator.
 
         Returns:
             float: Result of division of two given numbers

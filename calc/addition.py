@@ -1,9 +1,10 @@
+"""Addition subclass"""
 from calc.calculation import Calculation
 
 class Addition(Calculation):
     """Addition class.
     """
-    
+
     def get_result(self):
         """Adds two numbers together and returns result.
 
