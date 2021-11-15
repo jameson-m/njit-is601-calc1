@@ -9,6 +9,4 @@ script:
 
 branches:
   only:
-    - main
-    - dev
     - calc_part_2
