@@ -11,4 +11,7 @@ class Subtraction(Calculation):
         Returns:
             int: result of subtracting one number from another
         """
-        return self.value_a - self.value_b
+        result = self.values[0]
+        for value in self.values[1:]:
+            result = result - value
+        return result

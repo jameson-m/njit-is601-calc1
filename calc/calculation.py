@@ -2,16 +2,19 @@
 
 class Calculation:
     """Calculation base class."""
-    def __init__(self, value_a, value_b):
-        self.value_a = value_a
-        self.value_b = value_b
+    # pylint: disable=too-few-public-methods
+    def __init__(self, values: tuple):
+        self.values = Calculation.convert_args_to_list_float(values)
 
-    @classmethod
-    def create(cls, value_a, value_b):
-        """Class factory method."""
-        return cls(value_a, value_b)
+    # @classmethod
+    # def create(cls, values: tuple):
+    #     """Class factory method."""
+    #     return cls(values)
 
     @staticmethod
-    def speak():
-        """Let the calculator say hello!"""
-        return "Hello from your calculator!"
+    def convert_args_to_list_float(values):
+        """Standardize values to list of floats"""
+        list_values = []
+        for item in values:
+            list_values.append(float(item))
+        return list_values

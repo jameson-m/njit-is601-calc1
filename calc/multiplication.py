@@ -11,4 +11,7 @@ class Multiplication(Calculation):
         Returns:
             int: result of multiplying two numbers
         """
-        return self.value_a * self.value_b
+        result = self.values[0]
+        for value in self.values[1:]:
+            result = result * value
+        return result

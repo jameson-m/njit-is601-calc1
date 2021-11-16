@@ -81,7 +81,7 @@ class Calculator:
         return len(Calculator.history)
 
     @staticmethod
-    def add(value_a, value_b):
+    def add(*args):
         """
         Adds two numbers together.
 
@@ -92,12 +92,12 @@ class Calculator:
         Returns:
             Calculation: The created addition calculation object
         """
-        addition = Addition.create(value_a, value_b)
+        addition = Addition(args)
         Calculator.add_calculation_to_history(addition)
         return Calculator.get_last_calculation()
 
     @staticmethod
-    def subtract(value_a, value_b):
+    def subtract(*args):
         """
         Subtracts one number from another.
 
@@ -108,12 +108,12 @@ class Calculator:
         Returns:
             Calculation: The created subtraction calculation object
         """
-        subtraction = Subtraction.create(value_a, value_b)
+        subtraction = Subtraction(args)
         Calculator.add_calculation_to_history(subtraction)
         return Calculator.get_last_calculation()
 
     @staticmethod
-    def multiply(value_a, value_b):
+    def multiply(*args):
         """
         Multiplies two numbers together.
 
@@ -124,12 +124,12 @@ class Calculator:
         Returns:
             Calculation: The created multiplication calculation object
         """
-        multiplication = Multiplication.create(value_a, value_b)
+        multiplication = Multiplication(args)
         Calculator.add_calculation_to_history(multiplication)
         return Calculator.get_last_calculation()
 
     @staticmethod
-    def divide(value_a, value_b):
+    def divide(*args):
         """
         Divides two numbers together.
         If dividing by zero the result is 0.
@@ -141,6 +141,6 @@ class Calculator:
         Returns:
             float: Result of division of two given numbers
         """
-        division = Division.create(value_a, value_b)
+        division = Division(args)
         Calculator.add_calculation_to_history(division)
         return Calculator.get_last_calculation()
