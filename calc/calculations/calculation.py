@@ -6,10 +6,10 @@ class Calculation:
     def __init__(self, values: tuple):
         self.values = Calculation.convert_args_to_list_float(values)
 
-    # @classmethod
-    # def create(cls, values: tuple):
-    #     """Class factory method."""
-    #     return cls(values)
+    @classmethod
+    def create(cls, values: tuple):
+        """Class factory method."""
+        return cls(values)
 
     @staticmethod
     def convert_args_to_list_float(values):

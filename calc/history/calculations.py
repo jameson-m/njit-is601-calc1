@@ -1,3 +1,8 @@
+from calc.calculations.addition import Addition
+from calc.calculations.subtraction import Subtraction
+from calc.calculations.multiplication import Multiplication
+from calc.calculations.division import Division
+
 """Calculation history class"""
 class Calculations:
     """Calculation history class"""
@@ -41,6 +46,58 @@ class Calculations:
             bool: Whether or not adding to history was success
         """
         Calculations.history.append(calculation)
+        return True
+    
+    @staticmethod
+    def add_addition_calculation(values):
+        """Add an addition calculation to the calculator's history.
+
+        Args:
+            values (tuple): Values to be added together.
+        
+        Returns:
+            bool: Whether or not calculation was added to history.
+        """
+        Calculations.add_calculation_to_history(Addition.create(values))
+        return True
+    
+    @staticmethod
+    def add_subtraction_calculation(values):
+        """Add a subtraction calculation to the calculator's history.
+
+        Args:
+            values (tuple): Values to be subtracted together.
+        
+        Returns:
+            bool: Whether or not calculation was added to history.
+        """
+        Calculations.add_calculation_to_history(Subtraction.create(values))
+        return True
+    
+    @staticmethod
+    def add_multiplication_calculation(values):
+        """Add a multiplication calculation to the calculator's history.
+
+        Args:
+            values (tuple): Values to be multiplied together.
+        
+        Returns:
+            bool: Whether or not calculation was added to history.
+        """
+        Calculations.add_calculation_to_history(Multiplication.create(values))
+        return True
+    
+    @staticmethod
+    def add_division_calculation(values):
+        """Add a division calculation to the calculator's history.
+
+        Args:
+            values (tuple): Values to be divided together.
+        
+        Returns:
+            bool: Whether or not calculation was added to history.
+        """
+        Calculations.add_calculation_to_history(Division.create(values))
         return True
 
     @staticmethod
