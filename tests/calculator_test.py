@@ -2,63 +2,78 @@
 import pytest
 from calc.calculator import Calculator
 from calc.history.calculations import Calculations
+from data_manager.manager import DataManager
 
 @pytest.fixture(name="clear_history")
 def fixture_clear_history():
     """Fixture that clears the calculator's history for the next test."""
     return Calculations.clear_history()
 
-def test_calculator_add(clear_history):
+@pytest.fixture(name="df")
+def fixture_get_df():
+    """Fixture that gets the CSV file full of testing data"""
+    file_path = DataManager.get_absolute_path_from_relative_path("tests/test_data/test_data.csv")
+    return DataManager.read_csv_data(file_path)
+
+def test_calculator_add(clear_history, df):
     """Tests the calculator's add method."""
     assert clear_history is True
-    assert Calculator.add(1, 2).get_result() == 3
-    assert Calculator.add(2, 2).get_result() == 4
-    assert Calculator.add(3, 2).get_result() == 5
-    assert Calculator.add(3, 3).get_result() == 6
 
-    # test more than 2 numbers
-    assert Calculator.add(1, 2, 3).get_result() == 6
-    assert Calculator.add(1, 1, 1, 1, 1, 1, 1, 1).get_result() == 8
+    addition_results_key = DataManager.get_addition_results(df)
+    values = DataManager.get_list_of_values(df)
 
-def test_calculator_subtract(clear_history):
+    for row_index, result_key in enumerate(addition_results_key):
+        row_values = []
+        for val_column in values:
+            if val_column[row_index] is not None:
+                row_values.append(val_column[row_index])
+        
+        assert Calculator.add(*row_values).get_result() == result_key
+
+def test_calculator_subtract(clear_history, df):
     """Tests the calculator's subtract method."""
     assert clear_history is True
-    assert Calculator.subtract(3, 1).get_result() == 2
-    assert Calculator.subtract(9, 3).get_result() == 6
-    assert Calculator.subtract(8, 4).get_result() == 4
-    assert Calculator.subtract(6, 3).get_result() == 3
 
-    # test more than 2 numbers
-    assert Calculator.subtract(8, 3, 1).get_result() == 4
-    assert Calculator.subtract(16, 8, 1, 2).get_result() == 5
+    subtraction_results_key = DataManager.get_subtraction_results(df)
+    values = DataManager.get_list_of_values(df)
+    
+    for row_index, result_key in enumerate(subtraction_results_key):
+        row_values = []
+        for val_column in values:
+            if val_column[row_index] is not None:
+                row_values.append(val_column[row_index])
+        
+        assert Calculator.subtract(*row_values).get_result() == result_key
 
-def test_calculator_multiply(clear_history):
+def test_calculator_multiply(clear_history, df):
     """Tests the calculator's multiplication method."""
     assert clear_history is True
-    assert Calculator.multiply(3, 1).get_result() == 3
-    assert Calculator.multiply(9, 3).get_result() == 27
-    assert Calculator.multiply(8, 4).get_result() == 32
-    assert Calculator.multiply(6, 3).get_result() == 18
-    assert Calculator.multiply(2, 2).get_result() == 4
 
-    # test more than 2 numbers
-    assert Calculator.multiply(2, 2, 2, 2).get_result() == 16
-    assert Calculator.multiply(1, 1, 1, 1, 1).get_result() == 1
-    assert Calculator.multiply(1, 2, 3).get_result() == 6
+    multiplication_results_key = DataManager.get_multiplication_results(df)
+    values = DataManager.get_list_of_values(df)
 
-def test_calculator_divide(clear_history):
+    for row_index, result_key in enumerate(multiplication_results_key):
+        row_values = []
+        for val_column in values:
+            if val_column[row_index] is not None:
+                row_values.append(val_column[row_index])
+        
+        assert Calculator.multiply(*row_values).get_result() == result_key
+
+def test_calculator_divide(clear_history, df):
     """Tests the calculator's division method."""
     assert clear_history is True
-    assert Calculator.divide(3, 1).get_result() == 3
-    assert Calculator.divide(9, 3).get_result() == 3
-    assert Calculator.divide(27, 9).get_result() == 3
-    assert Calculator.divide(15, 3).get_result() == 5
-    assert Calculator.divide(2, 2).get_result() == 1
 
-    # test more than 2 numbers
-    assert Calculator.divide(16, 2, 2).get_result() == 4
-    assert Calculator.divide(1, 1, 1, 1, 1, 1, 1, 1).get_result() == 1
-    assert Calculator.divide(8, 3, 1, 0).get_result() == 0
+    division_results_key = DataManager.get_division_results(df)
+    values = DataManager.get_list_of_values(df)
+    
+    for row_index, result_key in enumerate(division_results_key):
+        row_values = []
+        for val_column in values:
+            if val_column[row_index] is not None:
+                row_values.append(val_column[row_index])
+        
+        assert round(Calculator.divide(*row_values).get_result(), 9) == result_key
 
 def test_calculator_divide_by_zero(clear_history):
     """Tests the calculator's ability to handle division by zero."""
