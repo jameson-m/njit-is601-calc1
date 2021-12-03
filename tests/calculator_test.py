@@ -27,7 +27,7 @@ def test_calculator_add(clear_history, df):
         for val_column in values:
             if val_column[row_index] is not None:
                 row_values.append(val_column[row_index])
-        
+
         assert Calculator.add(*row_values).get_result() == result_key
 
 def test_calculator_subtract(clear_history, df):
@@ -36,13 +36,13 @@ def test_calculator_subtract(clear_history, df):
 
     subtraction_results_key = DataManager.get_subtraction_results(df)
     values = DataManager.get_list_of_values(df)
-    
+
     for row_index, result_key in enumerate(subtraction_results_key):
         row_values = []
         for val_column in values:
             if val_column[row_index] is not None:
                 row_values.append(val_column[row_index])
-        
+
         assert Calculator.subtract(*row_values).get_result() == result_key
 
 def test_calculator_multiply(clear_history, df):
@@ -57,7 +57,7 @@ def test_calculator_multiply(clear_history, df):
         for val_column in values:
             if val_column[row_index] is not None:
                 row_values.append(val_column[row_index])
-        
+
         assert Calculator.multiply(*row_values).get_result() == result_key
 
 def test_calculator_divide(clear_history, df):
@@ -66,13 +66,13 @@ def test_calculator_divide(clear_history, df):
 
     division_results_key = DataManager.get_division_results(df)
     values = DataManager.get_list_of_values(df)
-    
+
     for row_index, result_key in enumerate(division_results_key):
         row_values = []
         for val_column in values:
             if val_column[row_index] is not None:
                 row_values.append(val_column[row_index])
-        
+
         assert round(Calculator.divide(*row_values).get_result(), 9) == result_key
 
 def test_calculator_divide_by_zero(clear_history):

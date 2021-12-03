@@ -80,3 +80,35 @@ def test_calculator_count_history(clear_history):
     Calculator.add(3, 2)
     Calculator.add(3, 2)
     assert Calculations.count_history() == 5
+
+def test_add_addition_calculation(clear_history):
+    """Tests the calculator history's add addition calculation method."""
+    assert clear_history is True
+
+    calculation_added = Calculations.add_addition_calculation((1, 2, 3, 4))
+    assert calculation_added is True
+    assert Calculations.count_history() == 1
+
+def test_add_subtraction_calculation(clear_history):
+    """Tests the calculator history's add subtraction calculation method."""
+    assert clear_history is True
+
+    calculation_added = Calculations.add_subtraction_calculation((1, 2, 3, 4))
+    assert calculation_added is True
+    assert Calculations.count_history() == 1
+
+def test_add_multiplication_calculation(clear_history):
+    """Tests the calculator history's add multiplication calculation method."""
+    assert clear_history is True
+
+    calculation_added = Calculations.add_multiplication_calculation((1, 2, 3, 4))
+    assert calculation_added is True
+    assert Calculations.count_history() == 1
+
+def test_add_division_calculation(clear_history):
+    """Tests the calculator history's add division calculation method."""
+    assert clear_history is True
+
+    calculation_added = Calculations.add_division_calculation((1, 2, 3, 4))
+    assert calculation_added is True
+    assert Calculations.count_history() == 1
