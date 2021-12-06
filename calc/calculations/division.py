@@ -16,4 +16,4 @@ class Division(Calculation):
                 result = result / value
             return result
         except ZeroDivisionError:
-            return 0
+            return 'ZERO_DIVISION_ERROR'

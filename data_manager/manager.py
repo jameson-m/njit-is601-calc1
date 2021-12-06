@@ -22,6 +22,27 @@ class DataManager:
         return relative.absolute()
 
     @staticmethod
+    def write_csv_data(data: tuple, columns: tuple, output_file_path: str) -> bool:
+        """Writes data in a dictionary to a CSV file. If the file exists, it will append.
+
+        Args:
+            data (tuple): Data to be written to file. Should be a list of dictionaries.
+            columns (tuple): Headers of CSV file.
+            output_file_path (str): Full path of output CSV file.
+        """
+        df = pd.DataFrame(data=data, index=columns).T
+
+        output_file = Path(output_file_path)
+
+        # pylint: disable=no-else-return
+        if output_file.is_file():
+            df.to_csv(output_file_path, mode="a", index=False, header=False)
+            return True
+        else:
+            df.to_csv(output_file_path, index=False)
+            return True
+
+    @staticmethod
     def read_csv_data(file_path: str) -> DataFrame:
         """Read in a given CSV file and return a DataFrame object.
 
@@ -98,6 +119,19 @@ class DataManager:
         """
         division_results = list(df["division_result"].values)
         return division_results
+
+    @staticmethod
+    def get_calculation_types(df: DataFrame) -> List[float]:
+        """Gets the values from the calculation_type column.
+
+        Args:
+            df (DataFrame): DataFrame containing values from CSV file.
+
+        Returns:
+            List[float]: List of values from calculation_type column.
+        """
+        calculation_types = list(df["calculation_type"].values)
+        return calculation_types
 
     @staticmethod
     def get_list_of_values(df: DataFrame) -> List[List[float]]:

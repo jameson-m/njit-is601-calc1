@@ -1,8 +1,10 @@
 """Calculation history class"""
 from calc.calculations.addition import Addition
+from calc.calculations.calculation import Calculation
 from calc.calculations.subtraction import Subtraction
 from calc.calculations.multiplication import Multiplication
 from calc.calculations.division import Division
+from logger.logger import Logger
 
 class Calculations:
     """Calculation history class"""
@@ -36,7 +38,7 @@ class Calculations:
         return Calculations.history[0]
 
     @staticmethod
-    def add_calculation_to_history(calculation):
+    def add_calculation_to_history(calculation: Calculation, operator: str):
         """Add a Calculation object to the calculator's history.
 
         Args:
@@ -46,6 +48,11 @@ class Calculations:
             bool: Whether or not adding to history was success
         """
         Calculations.history.append(calculation)
+        operations = operator.join(map(str, calculation.values))
+        if calculation.get_result() == 'ZERO_DIVISION_ERROR':
+            Logger.write_error_log(operations, calculation.get_result())
+        else:
+            Logger.write_calculation_log(operations, str(calculation.get_result()))
         return True
 
     @staticmethod
@@ -58,7 +65,7 @@ class Calculations:
         Returns:
             bool: Whether or not calculation was added to history.
         """
-        Calculations.add_calculation_to_history(Addition.create(values))
+        Calculations.add_calculation_to_history(Addition.create(values), " + ")
         return True
 
     @staticmethod
@@ -71,7 +78,7 @@ class Calculations:
         Returns:
             bool: Whether or not calculation was added to history.
         """
-        Calculations.add_calculation_to_history(Subtraction.create(values))
+        Calculations.add_calculation_to_history(Subtraction.create(values), " - ")
         return True
 
     @staticmethod
@@ -84,7 +91,7 @@ class Calculations:
         Returns:
             bool: Whether or not calculation was added to history.
         """
-        Calculations.add_calculation_to_history(Multiplication.create(values))
+        Calculations.add_calculation_to_history(Multiplication.create(values), " * ")
         return True
 
     @staticmethod
@@ -97,7 +104,7 @@ class Calculations:
         Returns:
             bool: Whether or not calculation was added to history.
         """
-        Calculations.add_calculation_to_history(Division.create(values))
+        Calculations.add_calculation_to_history(Division.create(values), " / ")
         return True
 
     @staticmethod

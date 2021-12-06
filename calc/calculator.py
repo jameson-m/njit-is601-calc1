@@ -1,10 +1,6 @@
 """
 Class representing a calculator.
 """
-from calc.calculations.addition import Addition
-from calc.calculations.division import Division
-from calc.calculations.multiplication import Multiplication
-from calc.calculations.subtraction import Subtraction
 from calc.history.calculations import Calculations
 
 class Calculator:
@@ -21,8 +17,7 @@ class Calculator:
         Returns:
             Calculation: The created addition calculation object
         """
-        addition = Addition(args)
-        Calculations.add_calculation_to_history(addition)
+        Calculations.add_addition_calculation(args)
         return Calculations.get_last_calculation()
 
     @staticmethod
@@ -37,8 +32,7 @@ class Calculator:
         Returns:
             Calculation: The created subtraction calculation object
         """
-        subtraction = Subtraction(args)
-        Calculations.add_calculation_to_history(subtraction)
+        Calculations.add_subtraction_calculation(args)
         return Calculations.get_last_calculation()
 
     @staticmethod
@@ -53,8 +47,7 @@ class Calculator:
         Returns:
             Calculation: The created multiplication calculation object
         """
-        multiplication = Multiplication(args)
-        Calculations.add_calculation_to_history(multiplication)
+        Calculations.add_multiplication_calculation(args)
         return Calculations.get_last_calculation()
 
     @staticmethod
@@ -70,6 +63,5 @@ class Calculator:
         Returns:
             float: Result of division of two given numbers
         """
-        division = Division(args)
-        Calculations.add_calculation_to_history(division)
+        Calculations.add_division_calculation(args)
         return Calculations.get_last_calculation()
