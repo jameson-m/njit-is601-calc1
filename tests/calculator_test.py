@@ -64,4 +64,4 @@ def test_calculator_divide(clear_history, df):
 def test_calculator_divide_by_zero(clear_history):
     """Tests the calculator's ability to handle division by zero."""
     assert clear_history is True
-    assert Calculator.divide(8, 0).get_result() == 0
+    assert Calculator.divide(8, 0).get_result() == "ZERO_DIVISION_ERROR"

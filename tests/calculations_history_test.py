@@ -15,7 +15,7 @@ def fixture_setup_addition_calculation():
     # pylint: disable=redefined-outer-name
     values = (1, 2)
     addition = Addition(values)
-    Calculations.add_calculation_to_history(addition)
+    Calculations.add_calculation_to_history(addition, " + ")
 
 def test_add_calculation_to_history(clear_history, setup_addition_calculation):
     """Testing that calculations are added to history"""
