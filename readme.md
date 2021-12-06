@@ -11,3 +11,7 @@ pytest  --pylint --cov
 .pylintrc is the config for pylint
 .coveragerc is the config for coverage
 setup.py is a config file for pytest
+
+## CSV and File Handling Assignment
+Here is a screenshot of the local test coverage. The travis badge should also be accurate.
+![csv assignment pytest coverage screenshot](assets/csv_assignment_pytest_screenshot.png "CSV Assignment Pytest Coverage Screenshot")
