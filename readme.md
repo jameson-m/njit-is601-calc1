@@ -13,5 +13,5 @@ pytest  --pylint --cov
 setup.py is a config file for pytest
 
 ## CSV and File Handling Assignment
-Here is a screenshot of the local test coverage. The travis badge should also be accurate.
+Here is a screenshot of the local test coverage. I am using a python 3.8.12 local virtual environment to run the code and tests.
 ![csv assignment pytest coverage screenshot](assets/csv_assignment_pytest_screenshot.png "CSV Assignment Pytest Coverage Screenshot")
