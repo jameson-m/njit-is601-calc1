@@ -1,0 +1,4 @@
+#!/bin/bash
+docker kill $(docker ps -q) # kills all local docker containers
+docker build -t tarheels90/njit-is601-calc .
+docker run -dp 80:80 tarheels90/njit-is601-calc

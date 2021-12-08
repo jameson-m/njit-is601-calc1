@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# NOTE: Original container instance must be killed before starting this script.
+
+docker context use default
+docker build -t tarheels90/njit-is601-calc .
+docker push tarheels90/njit-is601-calc
+docker context use azure
+docker run --domainname calc -dp 80:80 tarheels90/njit-is601-calc

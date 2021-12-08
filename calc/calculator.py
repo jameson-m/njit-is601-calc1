@@ -6,6 +6,12 @@ from calc.history.calculations import Calculations
 class Calculator:
     """Calculator class"""
     @staticmethod
+    def get_last_result_value():
+        """Gets the result of the calculation."""
+        # I made this method so that I don't have more than one action per function
+        return Calculations.get_last_calculation_result()
+
+    @staticmethod
     def add(*args):
         """
         Adds two numbers together.
