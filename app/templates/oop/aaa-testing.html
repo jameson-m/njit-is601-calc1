@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        
+        <main class="container">
+            <div>
+                <div class="top-banner">
+                    <h1>AAA Testing</h1>
+                </div>
+            </div>
+
+            <h2>What is AAA Testing?</h2>
+            <p>The AAA pattern for testing stands for the following three items:</p>
+            <ol>
+                <li>Arrange</li>
+                <li>Act</li>
+                <li>Assert</li>
+            </ol>
+            <p>Explanations for these three items are given below using an example calculator app project.</p>
+
+            <h3>Arrange</h3>
+            <p>Arrange inputs and targets—basically anything that needs to be done to set things up for the test is done at this step. If there are variables that need to be set before testing an addition method of a calculator for example, then these variables are set and given values at this point.</p>
+            <p>Let’s look at an example in more detail of how this would be used in a test function. Suppose we are testing the addition function of the calculator. We might write a test function like so:</p>
+            <pre>
+                <code class="language-py">
+def test_calculator_add(clear_history):
+    """Tests the calculator's add method."""
+
+    # Arrange -- clear out any prior calculator history
+    history_is_clear = Calculator.clear_history()
+
+    # Make sure calculator history was cleared
+    assert history_is_clear is True
+
+    # Test addition functionality
+    Calculator.add(1, 2)
+    Calculator.add(2, 2)
+    Calculator.add(3, 2)
+    Calculator.add(3, 3)
+    assert Calculator.count_history() == 4
+    assert Calculator.get_last_calculation_result() == 6
+                </code>
+            </pre>
+            <p>Notice that the first thing done within this function is to clear the calculator history. Since we will be performing calculations as part of the addition test, we want to make sure that there are no calculations still in the history that could mess up or change the expected behavior of the tests we write. </p>
+            <p>Sometimes there are steps within the Arrange step that need to be done often throughout testing. In the example of this calculator application, every test we perform will need to clear the calculator before moving on to the Act phase of the testing function. Therefore, we can write what is called a fixture to clear the calculator before each test function. Here is how the fixture code will look in our addition test example:</p>
+            <pre>
+                <code class="language-py">
+@pytest.fixture(name="clear_history")
+def fixture_clear_history():
+    """Fixture that clears the calculator's history for the next test."""
+    return Calculator.clear_history()
+
+def test_calculator_add(clear_history):
+    """Tests the calculator's add method."""
+    assert clear_history is True
+
+    Calculator.add(1, 2)
+    Calculator.add(2, 2)
+    Calculator.add(3, 2)
+    Calculator.add(3, 3)
+    assert Calculator.count_history() == 4
+    assert Calculator.get_last_calculation_result() == 6
+                </code>
+            </pre>
+            <p>Note that the fixture function performs the arrange step of clearing the calculator’s history and returns a boolean value of whether or not the history was successfully cleared. The fixture function is passed as a parameter into the test_calculator_add function, which calls the fixture function and makes the returned boolean value available within the test_calculator_add function.</p>
+
+            <h3>Act</h3>
+            <p>Once everything has been arranged and prepared for the unit test, we can perform actions to test application functionality. Let’s take a look at the addition test function again. Within the test function are these lines:</p>
+            <pre>
+                <code class="language-py">
+Calculator.add(1, 2)
+Calculator.add(2, 2)
+Calculator.add(3, 2)
+Calculator.add(3, 3)
+                </code>
+            </pre>
+            <p>These items perform the actual addition actions in the calculator. This is what the Act phase is all about.</p>
+
+            <h3>Assert</h3>
+            <p>Once actions are performed, a test needs to check that the results are as expected. In the case of an addition function, it’s important to check that the result of adding numbers together is correct. Let’s look at the last few lines of the test function:</p>
+            <pre>
+                <code class="language-py">
+Calculator.add(1, 2)
+Calculator.add(2, 2)
+Calculator.add(3, 2)
+Calculator.add(3, 3)
+assert Calculator.count_history() == 4
+assert Calculator.get_last_calculation_result() == 6
+                </code>
+            </pre>
+            <p>The first four lines are from the Act step and perform the addition actions. We then need to check two things:</p>
+            <ol>
+                <li>That the four addition calculations were indeed added to the calculator's history list</li>
+                <li>That the calculator is correctly adding numbers together</li>
+            </ol>
+            <p>The last two lines perform the assertions using the assert keyword. The first checks to make sure that four addition calculations were added to the history. The second checks the final addition calcluation to make sure that its result is correct.</p>
+
+            <br />
+
+            <h2>Using External Data for Testing</h2>
+            <p>For a working demo application showing external data importing with testing, <a href="https://github.com/jameson-m/njit-is601-calc1/tree/test_with_data_import">click here</a>.</p>
+            <p>An even better way to test code is by using external data. This allows you to run many tests without having to hardcode each item. For example, when testing the calculator application, we initially tested the addition method by hardcoding each addition method call like so:</p>
+            <pre>
+                <code class="language-py">
+Calculator.add(1, 2)
+Calculator.add(2, 2)
+Calculator.add(3, 2)
+Calculator.add(3, 3)
+                </code>
+            </pre>
+            <p>However, it’s much better to import data to test the addition method (and other methods). This means less hardcoding and a much easier way to test functions. These same hardcoded function calls can be represented in a CSV file like so:</p>
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>addition_result</th>
+                        <th>value_1</th>
+                        <th>value_2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The first column gives the result of the addition of the value columns. For testing subtraction, multiplication, and division, you can add additional columns before the value columns for those values. For the purposes of this tutorial we will just focus on addition. In order to read the CSV file, we will use a python package called pandas. To make it easier to use pandas, a DataManager class can be created. This class has methods to read CSV file data and extract results and values for calculations.</p>
+            <pre>
+                <code class="language-py">
+"""Data Manager"""
+from typing import List
+from pathlib import Path
+import pandas as pd
+from pandas.core.frame import DataFrame
+import numpy
+
+class DataManager:
+    """Data manager class using pandas to read CSV files.
+    """
+    @staticmethod
+    def get_absolute_path_from_relative_path(file_path: str) -> str:
+        """Converts a relative path to absolute path.
+
+        Args:
+            path_name (str): relative path
+
+        Returns:
+            str: absolute path
+        """
+        relative = Path(file_path)
+        return relative.absolute()
+
+    @staticmethod
+    def read_csv_data(file_path: str) -> DataFrame:
+        """Read in a given CSV file and return a DataFrame object.
+
+        Args:
+            file_path (str): Absolute path to CSV file.
+
+        Returns:
+            DataFrame: DataFrame representing the CSV data.
+        """
+        df = pd.read_csv(file_path, header=0)
+        return df
+
+    @staticmethod
+    def get_csv_headers(df: DataFrame) -> List[str]:
+        """Gets a list of the headers from first row in CSV file (ordered).
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[str]: List of headers.
+        """
+        headers = list(df.columns.values)
+        return headers
+
+    @staticmethod
+    def get_addition_results(df: DataFrame) -> List[float]:
+        """Get a list of values from the addition_result column.
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[float]: List of addition result values.
+        """
+        addition_results = list(df["addition_result"].values)
+        return addition_results
+
+    @staticmethod
+    def get_subtraction_results(df: DataFrame) -> List[float]:
+        """Get a list of values from the subtraction_result column.
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[float]: List of subtraction result values.
+        """
+        subtraction_results = list(df["subtraction_result"].values)
+        return subtraction_results
+
+    @staticmethod
+    def get_multiplication_results(df: DataFrame) -> List[float]:
+        """Get a list of values from the multiplication_result column.
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[float]: List of multiplication result values.
+        """
+        multiplication_results = list(df["multiplication_result"].values)
+        return multiplication_results
+
+    @staticmethod
+    def get_division_results(df: DataFrame) -> List[float]:
+        """Get a list of values from the division_result column.
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[float]: List of division result values.
+        """
+        division_results = list(df["division_result"].values)
+        return division_results
+
+    @staticmethod
+    def get_list_of_values(df: DataFrame) -> List[List[float]]:
+        """Gets a list of all value columns represented as a 2D array.
+        If a cell has no value, a value of None is entered.
+
+        Args:
+            df (DataFrame): DataFrame representing CSV file.
+
+        Returns:
+            List[List[float]]: List of value column values.
+        """
+        values_list = []
+        headers = DataManager.get_csv_headers(df)
+        value_headers = filter(lambda header: "value" in header, headers)
+
+        for header in value_headers:
+            values = list(df[header].values)
+            for index, value in enumerate(values):
+                if numpy.isnan(value):
+                    values[index] = None
+                else:
+                    values[index] = value
+            values_list.append(values)
+
+        return values_list
+                    
+                </code>
+            </pre>
+            <p>The first method enables conversion of relative paths to absolute paths. It is much more reliable to reference absolute paths when importing a file. The read_csv_data method reads the given CSV file (absolute path is passed as parameter) and returns a pandas DataFrame object. This object contains all the data in the CSV file, which can then be used to extract what we need for testing.</p>
+            <p>There are then four methods for extracting values in the results columns. This is useful for each calculation test type since we will need to compare the expected result to the calculated result. After those methods is a method get_list_of_values. This method parses through the headers to see how many value headers exist. Since this method counts the number of value headers it allows the imported data file to have as many value columns as it wants. It also makes sure that any cells missing a value are marked as “None”. This allows for the test data rows to have varying amounts of values for calculations. Using a data import file in this way allows for really great flexibility and test robustness.</p>
+            <p>Here is what a test function that uses this DataManager class might look like. Notice the fixture function that calls the read_csv_data method and returns a DataFrame object. This fixture can be used in all testing functions to make it easier to automatically have access to a DataFrame.</p>
+            <pre>
+                <code class="language-py">
+@pytest.fixture(name="df")
+def fixture_get_df():
+    """Fixture that gets the CSV file full of testing data"""
+    file_path = DataManager.get_absolute_path_from_relative_path("tests/test_data/test_data.csv")
+    return DataManager.read_csv_data(file_path)
+
+def test_calculator_add(clear_history, df):
+    """Tests the calculator's add method."""
+    assert clear_history is True
+
+    addition_results_key = DataManager.get_addition_results(df)
+    values = DataManager.get_list_of_values(df)
+
+    for row_index, result_key in enumerate(addition_results_key):
+        row_values = []
+        for val_column in values:
+            if val_column[row_index] is not None:
+                row_values.append(val_column[row_index])
+
+        assert Calculator.add(*row_values).get_result() == result_key
+                </code>
+            </pre>
+            <p>Basically, this test function is reading each row, summing the values (and ignoring any marked as “None”), and comparing the calculator app’s result to the expected result given in the CSV file.</p>
+        </main>
+    </div>
+{% endblock %}

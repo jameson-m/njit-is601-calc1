@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        
+        <main class="container">
+            <div>
+                <div class="top-banner">
+                    <h1>Principles of Object Oriented Programming</h1>
+                </div>
+            </div>
+
+            <p>There are several principles of object oriented programming (OOP) that are important to understand.</p>
+            <ol>
+                <li>Encapsulation</li>
+                <li>Inheritance</li>
+                <li>Polymorphism</li>
+                <li>Abstraction</li>
+            </ol>
+            <p>Definitions of these terms are found in the below sections. Additionally, examples demonstrating each term will be shown in the context of a calculator application.</p>
+            <p>For a working demo application showing OOP principles, <a href="https://github.com/jameson-m/njit-is601-calc1/tree/oop_principles">click here</a>.</p>
+
+            <h2>Encapsulation</h2>
+            <p>Encapsulation is achieved when each object keeps its state private inside a class. Other objects don't have direct access to this state and instead can only call a list of public functions (called methods). These public functions provide access to the data indirectly. This allows for data to be accessed in a limited fashion, thereby protecting its integrity.</p>
+            <p>Here is an example of what encapsulation looks like in a python program.</p>
+            <pre>
+                <code class="language-py">
+class Calculations:
+    """Calculation history class"""
+    # By including the underscore in front of the variable name, this property has been marked as private
+    _history = []
+
+    # This get_history method is what's known as a getter. Instead of getting the history directly, other functions can call this method to get the full history.
+    @staticmethod
+    def get_history():
+        """Get full calculator history.
+
+        Returns:
+            list: List of Calculation objects
+        """
+        return Calculations._history
+
+    # Instead of setting the history property directly, a method clear_history is used to control how the history property is cleared.
+    @staticmethod
+    def clear_history():
+        """Clears the calculator's history.
+
+        Returns:
+            bool: If calculator's history was successfully cleared
+        """
+        Calculations._history.clear()
+        return True
+                </code>
+            </pre>
+            <p>Notice that the history property is marked as private and there are two methods for performing functions on the history property. Whenever an action needs to be done on the history, one of these or other methods should be invoked instead.</p>
+            <p>Not only does encapsulation protect class properties, but it also makes things easier for the programmer. If, for example, adding a calculation to the history required more than just a simple list.append(), by abstracting this away into a class method it becomes simpler to write in this functionality and maintain it in the future. Any programmers using the add to history method will not need to know the implementation of what happens behind the scenes—they simply know that it’s the function that’s called when adding an item to the history.</p>
+
+            <h2>Inheritance</h2>
+            <p>Inheritance is a way to extend classes onto other classes to add in functionality. The parent or base class’s methods and properties are inherited by the child classes. However, not only do the child classes receive the base class’s methods and properties, additional methods and properties specific to the child class can be added. These additional methods and properites are not available in the base class.</p>
+            <p>For example, we could have a base class of Calculation that provides some base functionality that is used across all types of calculations. In the code below, note that the convert_args_to_list_float function is helpful for all types of calculations as it converts the numbers given as args into floats. Without inheritance it would be necessary to copy this method into each class individually. Look at the Subtraction subclass below. Next to the subclass name, the parent class’s name is given in parentheses to denote that it is inheriting from that parent class. Within the subclass additional properties and methods can be defined. In the case of the Subtraction class, the get_result function is written to handle subtraction specifically. No other Calculation subclass will need access to this type of get_result function; each subclass can implement their own version of get_result.</p>
+            <pre>
+                <code class="language-py">
+class Calculation:
+    """Calculation base class."""
+    # pylint: disable=too-few-public-methods
+    def __init__(self, values: tuple):
+        self.values = Calculation.convert_args_to_list_float(values)
+
+    @classmethod
+    def create(cls, values: tuple):
+        """Class factory method."""
+        return cls(values)
+
+    @staticmethod
+    def convert_args_to_list_float(values):
+        """Standardize values to list of floats"""
+        list_values = []
+        for item in values:
+            list_values.append(float(item))
+        return list_values
+
+
+class Subtraction(Calculation):
+    """Subtraction class.
+    """
+
+    def get_result(self):
+        """Subtracts two numbers together and returns result.
+
+        Returns:
+            int: result of subtracting one number from another
+        """
+        result = self.values[0]
+        for value in self.values[1:]:
+            result = result - value
+        return result
+                </code>
+            </pre>
+
+            <h2>Polymorphism</h2>
+            <p>Polymorphism provides a way for different classes to be used in similar ways to one another, but each class retains its own methods and properties as they are defined. This is typically done by defining a parent interface, which is then implemented by each child class.</p>
+            <p>For example, let’s say we have a Calculation class like so:</p>
+            <pre>
+                <code class="language-py">
+class Calculation:
+    """Calculation base class."""
+    # pylint: disable=too-few-public-methods
+    def __init__(self, values: tuple):
+        self.values = Calculation.convert_args_to_list_float(values)
+
+    @classmethod
+    def create(cls, values: tuple):
+        """Class factory method."""
+        return cls(values)
+
+    @staticmethod
+    def convert_args_to_list_float(values):
+        """Standardize values to list of floats"""
+        list_values = []
+        for item in values:
+            list_values.append(float(item))
+        return list_values
+                </code>
+            </pre>
+            <p>This class will serve as the base class for all sorts of calculations such as addition, subtraction, multiplication, and division. An Addition class will inherit what is already defined in the Calculation class like so:</p>
+            <pre>
+                <code class="language-py">
+class Addition(Calculation):
+    """Addition class.
+    """
+
+    def get_result(self):
+        """Adds two numbers together and returns result.
+
+        Returns:
+            int: result of two numbers added
+        """
+        sum_of_values = 0.0
+        for value in self.values:
+            sum_of_values = value + sum_of_values
+        return sum_of_values                
+                </code>
+            </pre>
+            <p>Notice that the Calculation class is in parentheses next to the `class Addition` . This means that the Addition class inherits all the methods and properties of the parent Calculation class. Not only does this help standardize important methods and properties across similar classes, but it also allows for grouping calculations of different kinds into data structures such as lists. Since each is essentially a Calculation subclass, they can all be treated as such within a data structure.</p>
+            <p>It’s important to note in the case of these examples that python does not explicitly allow for the creation of interfaces like other languages do. Its implementation of polymorphism is similar to inheritance in that methods and properties of the parent class are already implemented. More traditionally an interface class is created to simply specify methods and properties that should be implemented by all subclasses of that interface type.</p>
+
+            <h2>Abstraction</h2>
+            <p>Abstraction can be seen as a natural extension of encapsulation. The basic idea is that each object should only expose a high-level mechanism for using it. All internal implementation details should be abstracted away from the programmer using the class. Only operations relevant for other objects should be revealed.</p>
+            <p>Let’s return to the example of the calculator history for further explanation:</p>
+            <pre>
+                <code class="language-py">
+class Calculations:
+    """Calculation history class"""
+    history = []
+
+    # This method is used for appending items to the history array. It is not a good idea to allow access to appending to the history array directly.
+    @staticmethod
+    def add_calculation_to_history(calculation):
+        """Add a Calculation object to the calculator's history.
+
+        Args:
+            calculation (Calculation): Calculation object to add to history
+
+        Returns:
+            bool: Whether or not adding to history was success
+        """
+        Calculations.history.append(calculation)
+        return True
+
+    # This method pulls the first calculation from the history array and returns it to the user. This is a much better approach than allowing the user to do something like Calculations.history[0].
+    @staticmethod
+    def get_first_calculation():
+        """Get the first Calculation object in history.
+
+        Returns:
+            Calculation: First Calculation performed
+        """
+        return Calculations.history[0]
+                </code>
+            </pre>
+            <p>In this example we see two different methods used to manipulate the history: add_calculation_to_history and get_first_calculation. The first method lets the user add a calculation to the history array. It completely abstracts away this functionality. All the user needs to know is that a Calculation object needs to be supplied to the function when called. The second method allows the user to retrieve the first calculation from the history. Again, everything is abstracted away from the user including the need for knowing indices. All the user has to do is call that function, and they will receive the first calculation in history.</p>
+
+        </main>
+    </div>
+{% endblock %}

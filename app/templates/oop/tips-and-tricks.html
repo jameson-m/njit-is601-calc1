@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+
+        <main class="container">
+            <div>
+                <div class="top-banner">
+                    <h1>Tips and Tricks</h1>
+                </div>
+            </div>
+
+            <p>For a working demo application that passes pylint, <a href="https://github.com/jameson-m/njit-is601-calc1/tree/tips_and_tricks">click here</a>.</p>
+            
+            <h2>Implementing pylint</h2>
+            <p>A linter is a code analysis tool that is used to flag programming errors, bugs, and stylistic errors in code. Typically this is something that is used prior to code execution or compilation in order to prevent these errors or bugs from happening. For example, if a function is expecting a string for one of its parameters but an integer is given in one of the function calls, this could lead to a potentially hard to track error. A linter could catch this mistake before code execution and notify the programmer to fix it properly. There are many other things a linter can check for that are extremely helpful for a coder.</p>
+            <p>For programmers who write code in python, there is a linter called <strong>pylint</strong> that can be used for this purpose. Pylint can be configured to check for all sorts of issues including coding standards (style) and type checking. While writing python code, the programmer should do their best to try and follow stylistic best practices. For more information on where to find these, please go to the <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8 -- Style Guide for Python Code</a> page. Do not be too concerned with perfectly following the style--this is where pylint will help! When you run the pylint command (demonstrated below) it will check your code and warn you if you are not perfectly following the style guide. You can then easily fix these mistakes based on the given warning messages.</p>
+            <p>One really useful tool to use when using pylint is variable typing. This means that when you declare a variable you also specify what its data type should be. This allows pylint to check and make sure that variables are assigned data values of the correct type. Let’s say for example that you have a function that adds two integers. What if you accidentally call that function and pass two strings instead? This would throw an error when the application runs. By using typing and pylint, you can catch these types of mistakes before the code executes.</p>
+            <p>So, how do you use the typing functionality? Just like this:</p>
+
+            <pre><code class="language-py">greeting: str = "hello, world!"</code></pre>
+            
+            <p>In this code we are creating a variable named “greeting” and assigning it a value of “hello, world!”. After the variable is given a name there is a colon followed by the desired data type. For more information on typing in python, please see <a href="https://docs.python.org/3/library/typing.html">this page</a>.</p>
+            <p>In order to run pylint, you need to run the following command within the project directory:</p>
+
+            <pre><code class="language-shell">pylint .</code></pre>
+            
+            <p>This will run the pylint linter and check all files in the given directory. Additionally, you can pass an option to pytest that runs pylint as part of the testing:</p>
+            
+            <pre><code class="language-shell">pytest --pylint --cov</code></pre>
+            
+            <br />
+
+            <h2>Glossary of OOP Terms</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Factory</div>
+                        A function that creates an instance of a class. The actual implementation of how the object is created is abstracted away from the programmer. This allows for changes to be easily made to how an object is instantiated.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Instance</div>
+                        An object created from a class.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Object</div>
+                        An instance of a class.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Class</div>
+                        A blueprint for an object; contains all attributes and functions of the object.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Namespace</div>
+                        A way to ensure variable names referring to objects are unique. For Example, if you have two variables named “greeting”, without using namespaces it would not be possible for these two variables to be named the same. Within each namespace a variable name is guaranteed to be unique.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Constructor</div>
+                        A special type of method that is called to create an object of a given type. For example, for a class Person, a constructor can be called to create a new person with a name, age, etc.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Fixture</div>
+                        A simple function called between tests to set up a test to run properly. For example, in a calculator program it would be important to clear the calculator between tests so that each test runs on a reliably clean environment.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Type Hint</div>
+                        Hints given in an IDE to help the programmer know what type a variable should be.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Type Cast</div>
+                        Conversion between data types; for example, a string “23” can be type cast to an int 23.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Unit Test</div>
+                        Automated tests written by a software developer to test a small section of an application. These tests might test a single function or a single item within a function. For example, let’s say you have a divide function. You might have one test that tests dividing two numbers produces the desired result and another test that checks that dividing by zero errors are handled properly. Each of these tests is a unit test.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Static</div>
+                        A variable marked as “static” is allocated in memory for the duration of the program. Classes with static methods do not need to be instantiated before these methods are used.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Class Method</div>
+                        Methods for a specific class. For example, a Car class would have a “honk” method but a Airplane class would not. The “honk” method is a class method.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Facade</div>
+                        The facade pattern is an object that serves as a front-facing interface masking more complex underlying code.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Method</div>
+                        A function that is part of any objects of a given class.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Property</div>
+                        A variable specific to objects of a given class. For example, a Car class would have properties such as color or number of doors.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Abstraction</div>
+                        Hiding internal details of a given object from the user.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Encapsulation</div>
+                        Combining an object’s attributes and functionality into a single package (class); allows the programmer to access properties and methods of a class without needing to worry about how a class is implemented.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Inheritance</div>
+                        Create a new class from an existing class. The new class inherits properties and methods from the base class.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Base Class</div>
+                        Original or parent class from which dervied classes inherit properties and methods.
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Derived Class</div>
+                        Newly created class that inherits properties and methods from the base class. Additional new properties and methods can be created specifically to this new class.
+                    </div>
+                </li>
+            </ul>
+        </main>
+    </div>
+{% endblock %}
