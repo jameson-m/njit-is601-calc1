@@ -7,11 +7,96 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>Index</h1>
-    <p class="important">
-      Welcome to my awesome homepage.
-        <img src="{{ url_for('static', filename='images/sample.jpeg') }}">
-    </p>
+    
+    <div>
+        <main class="container">
+            <div>
+                <div class="p-5 mb-4 bg-light rounded-3 hero-image">
+                    <div class="container-fluid py-5">
+                        <!-- <p class="col-md-8 fs-4 hero-image-text">"We are all now connected by the Internet, like neurons in a giant brain."</p>
+                        <p class="col-md-8 fs-4 hero-image-text">Stephen Hawking</p> -->
+                        <h1 class="hero-image-text">Project 3: Calculator and Articles</h1>
+                    </div>
+                </div>
 
-<a href="/good/1.0/2.0">One Plus Two Good</a><br><a href="/bad/1/2">One Plus Two Bad</a>
+                <div class="row align-items-md-stretch article-card-row">
+                    <div class="article-card">
+                        <div class="h-80 p-5 bg-dark border rounded-3" style="color:#fff;">
+                            <h2><i class="fas fa-calculator"></i>&nbsp;Calculator App</h2>
+                            <p>It's time for math.</p>
+                            <a class="btn btn-outline-light" href="/calculator">Launch&nbsp;🚀</a>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+        
+                <div class="row align-items-md-stretch article-card-row">
+                    <div style="margin-bottom:20px;">
+                        <h2><i class="far fa-newspaper"></i>&nbsp;Articles</h2>
+                    </div>
+
+                    <div>
+                        <h3>Internet History</h3>
+                    </div>
+
+                    <div class="row article-card-row">
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>Timeline of the Internet</h2>
+                                <p>Contains a brief timeline of the major incidents culminating the advent of the Internet.</p>
+                                <a class="btn btn-outline-secondary" href="/internet-history/timeline">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>Key Players</h2>
+                                <p>A list of people who played important roles in the invention and emergence of the Internet.</p>
+                                <a class="btn btn-outline-secondary" href="/internet-history/people">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:40px;">
+                        <h3>Object Oriented Programming</h3>
+                    </div>
+                    <div class="row article-card-row">
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>Tips and Tricks</h2>
+                                <p>Learn how to use pylint. Also contains a glossary of common OOP terms.</p>
+                                <a class="btn btn-outline-secondary" href="/oop/tips-and-tricks">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>AAA Testing</h2>
+                                <p>What is AAA testing? How can we use external data files to improve testing?</p>
+                                <a class="btn btn-outline-secondary" href="/oop/aaa-testing">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row article-card-row">
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>OOP Principles</h2>
+                                <p>What are the basic principles of object oriented programming?</p>
+                                <a class="btn btn-outline-secondary" href="/oop/oop-principles">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 article-card">
+                            <div class="h-80 p-5 bg-light border rounded-3">
+                                <h2>Separation of Concerns</h2>
+                                <p>How should code be structured and split up?</p>
+                                <a class="btn btn-outline-secondary" href="/oop/separation-of-concerns">Read&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+
 {% endblock %}
