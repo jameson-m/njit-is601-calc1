@@ -2,6 +2,7 @@
 import os
 import pytest
 from data_manager.manager import DataManager
+from calc.calculator import Calculator
 
 @pytest.fixture(name="df")
 def fixture_get_df():
@@ -52,3 +53,9 @@ def test_get_calculation_types(df_calc_types):
     assert calculation_types[1] == "subtraction"
     assert calculation_types[2] == "multiplication"
     assert calculation_types[3] == "division"
+
+def test_get_results_csv():
+    """Tests to make sure that the results CSV can be loaded."""
+    results_values = DataManager.get_results_csv()
+    Calculator.add(1, 2)
+    assert len(results_values) > 0

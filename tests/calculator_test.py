@@ -65,3 +65,16 @@ def test_calculator_divide_by_zero(clear_history):
     """Tests the calculator's ability to handle division by zero."""
     assert clear_history is True
     assert Calculator.divide(8, 0).get_result() == "ZERO_DIVISION_ERROR"
+
+def test_calculator_get_last_result_value(clear_history):
+    """Tests the get_last_result_value method."""
+    assert clear_history is True
+
+    Calculator.add(1, 1)
+    assert Calculator.get_last_result_value() == 2
+    Calculator.subtract(3, 2)
+    assert Calculator.get_last_result_value() == 1
+    Calculator.multiply(2, 5)
+    assert Calculator.get_last_result_value() == 10
+    Calculator.divide(21, 7)
+    assert Calculator.get_last_result_value() == 3
