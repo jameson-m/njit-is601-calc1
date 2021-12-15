@@ -9,16 +9,18 @@ class CalculatorController(ControllerBase):
     def post():
         """Handles calculator's post route.
         """
-        if request.form["value1"] == "" or request.form["value2"] == "":
-            flash("You must enter a value for value 1 and or value 2", "error")
+        # Get the values out of the form
+        values = request.form.getlist("value")
+        print("V A L U E S :")
+        print(values)
+        has_missing_values = "" in values
+        if has_missing_values:
+            flash("One or more values are missing. Please enter a value for each input.", "error")
         else:
             flash("Your calculation was successful!", "success")
 
-            # Get the values out of the form
-            value1 = request.form['value1']
-            value2 = request.form['value2']
             operation = request.form['operation']
-            calc_tuple = (value1, value2)
+            calc_tuple = tuple(values)
             
             # Call correct calculation
             getattr(Calculator, operation)(*calc_tuple)
@@ -26,7 +28,9 @@ class CalculatorController(ControllerBase):
             results_history = DataManager.get_results_csv()
             results_history_formatted = list(map((lambda row: row[:1] + [datetime.utcfromtimestamp(int(row[1]))] + row[2:]), results_history))
             
-            return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result, results_history=results_history_formatted)
+            # return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result, results_history=results_history_formatted)
+            return render_template('result.html', values=values, operation=operation, result=result, results_history=results_history_formatted)
+
         return render_template("calculator.html")
 
     @staticmethod

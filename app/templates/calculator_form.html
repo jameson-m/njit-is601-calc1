@@ -3,9 +3,21 @@
   <div class="card calculator-card">
     <div class="card-body">
       <h1 style="text-align:center;margin-bottom:20px"><i class="fas fa-calculator"></i>&nbsp;Calculator</h1>
+      
       <form action="/calculator" method="POST">
-        <input type="text" id="value1" name="value1" value="" class="form-control" placeholder="Value 1" aria-label="Value 1"><br>
-        <input type="text" id="value2" name="value2" value="" class="form-control" placeholder="Value 2" aria-label="Value 2"><br>
+        <div style="display:flex;flex-direction:row;justify-content:center;margin-bottom:20px;">
+          <div class="btn-group" role="group" aria-label="Values Editor Buttons">
+            <button type="button" id="increment_values_button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-plus-circle"></i>&nbsp;Value</button>
+            <button type="button" id="decrement_values_button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-minus-circle"></i>&nbsp;Value</button>
+            <button type="button" id="reset_values_button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-undo-alt"></i>&nbsp;Reset</button>
+          </div>
+        </div>
+
+        <div id="value_inputs">
+          <div class="mb-3" id="value-div-1"><input type="text" id="value1" name="value" value="" class="form-control" placeholder="Value" aria-label="Value" /></div>
+          <div class="mb-3" id="value-div-2"><input type="text" id="value2" name="value" value="" class="form-control" placeholder="Value" aria-label="Value" /></div>
+        </div>
+        
         <fieldset>
         <legend>Operation</legend>
           <div class="form-check">
@@ -32,5 +44,54 @@
       </form>
     </div>
   </div>
+
+  <script>
+    /**
+     * Gets the div containing all value inputs.
+     */
+    function getValueInputsDiv() {
+      return document.getElementById('value_inputs');
+    }
+
+    /**
+     * Adds an additional value input.
+     */
+    function incrementNumInputs() {
+      const valueInputsDiv = getValueInputsDiv();
+      const inputCount = valueInputsDiv.children.length;
+      valueInputsDiv.insertAdjacentHTML('beforeend', `<div class="mb-3" id="value-div-${inputCount + 1}"><input type="text" id="value${inputCount + 1}" name="value" value="" class="form-control" placeholder="Value" aria-label="Value" /></div>`)
+    }
+
+    /**
+     * Removes a value input.
+     * If only 2 value inputs remain, this does nothing.
+     */
+    function decrementNumInputs() {
+      const valueInputsDiv = getValueInputsDiv();
+      const inputCount = valueInputsDiv.children.length;
+      if (inputCount > 2) {
+        const childToRemove = document.getElementById(`value-div-${inputCount}`);
+        valueInputsDiv.removeChild(childToRemove);
+      }
+    }
+
+    /**
+     * Resets to the standard 2 value inputs.
+     */
+    function resetNumInputs() {
+      const valueInputsDiv = getValueInputsDiv();
+      valueInputsDiv.innerHTML = '';
+      incrementNumInputs();
+      incrementNumInputs();
+    }
+
+    // Attach each function to corresponding button.
+    const incrementButton = document.getElementById('increment_values_button');
+    incrementButton.addEventListener('click', incrementNumInputs);
+    const decrementButton = document.getElementById('decrement_values_button');
+    decrementButton.addEventListener('click', decrementNumInputs);
+    const resetButton = document.getElementById('reset_values_button');
+    resetButton.addEventListener('click', resetNumInputs);
+  </script>
 
 {% endblock %}
