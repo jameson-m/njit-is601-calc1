@@ -64,7 +64,8 @@ class Logger:
         output_file_path = DataManager.get_absolute_path_from_relative_path("results/calculation_results.csv")
 
         # pylint: disable=line-too-long
-        output_data = (record_number, timestamp, Logger.input_file_name, operation, calculation_result)
+        i_filename = Logger.input_file_name if Logger.input_file_name != "" else "Calculator Web App"
+        output_data = (record_number, timestamp, i_filename, operation, calculation_result)
         columns = ("record", "timestamp", "input_file", "operation", "result")
 
         log_was_written = Logger.write_to_log(output_data, columns, output_file_path)
