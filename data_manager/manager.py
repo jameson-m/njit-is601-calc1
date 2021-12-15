@@ -167,6 +167,7 @@ class DataManager:
         Returns:
             List[List[str]]: 2D list of results
         """
+        # pylint: disable=line-too-long
         absolute_path = DataManager.get_absolute_path_from_relative_path("results/calculation_results.csv")
         df = DataManager.read_csv_data(absolute_path)
         return df.values.tolist()

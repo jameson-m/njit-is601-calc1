@@ -1,7 +1,9 @@
+"""Internet history controller"""
 from flask import render_template
 from app.controllers.controller import ControllerBase
 
 class InternetHistoryController(ControllerBase):
+    """Internet history controller"""
     @staticmethod
     def get_timeline():
         """Handles getting Internet History timeline article template.

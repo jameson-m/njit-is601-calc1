@@ -1,10 +1,12 @@
-from flask import request, render_template, flash
+"""Calculator controller"""
 from datetime import datetime
+from flask import request, render_template, flash
 from app.controllers.controller import ControllerBase
 from calc.calculator import Calculator
 from data_manager.manager import DataManager
 
 class CalculatorController(ControllerBase):
+    """Calculator controller"""
     @staticmethod
     def post():
         """Handles calculator's post route.
@@ -21,14 +23,14 @@ class CalculatorController(ControllerBase):
 
             operation = request.form['operation']
             calc_tuple = tuple(values)
-            
+
             # Call correct calculation
             getattr(Calculator, operation)(*calc_tuple)
             result = str(Calculator.get_last_result_value())
             results_history = DataManager.get_results_csv()
+            # pylint: disable=line-too-long
             results_history_formatted = list(map((lambda row: row[:1] + [datetime.utcfromtimestamp(int(row[1]))] + row[2:]), results_history))
-            
-            # return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result, results_history=results_history_formatted)
+
             return render_template('result.html', values=values, operation=operation, result=result, results_history=results_history_formatted)
 
         return render_template("calculator.html")

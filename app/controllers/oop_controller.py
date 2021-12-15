@@ -1,7 +1,9 @@
+"""OOP controller"""
 from flask import render_template
 from app.controllers.controller import ControllerBase
 
 class OOPController(ControllerBase):
+    """OOP controller"""
     @staticmethod
     def get_tips_and_tricks():
         """Handles getting OOP tips and tricks article template.
