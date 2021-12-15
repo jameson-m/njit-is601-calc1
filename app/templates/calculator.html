@@ -10,17 +10,21 @@
 {% endblock %}
 {% block content %}
 
-    <h1>My Calculator</h1>
-        {% with errors = get_flashed_messages(category_filter=["error"]) %}
-            {% if errors %}
-                {% for message in errors %}
-                    <div class="alert alert-danger error" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    <div class="mb-3 row">
-        {% include "calculator_form.html" %}
+    <div style="display:flex;flex-direction:row;justify-content:center;align-items:center;">
+        <div style="width:400px;">
+            {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                {% if errors %}
+                    {% for message in errors %}
+                        <div class="alert alert-danger error" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="mb-3 row">
+                {% include "calculator_form.html" %}
+            </div>
+        </div>
     </div>
+    
 {% endblock %}
