@@ -158,3 +158,15 @@ class DataManager:
             values_list.append(values)
 
         return values_list
+
+    @staticmethod
+    def get_results_csv() -> List[List[str]]:
+        """Reads in the results CSV and returns a 2D list of results
+        to be printed in an HTML table.
+
+        Returns:
+            List[List[str]]: 2D list of results
+        """
+        absolute_path = DataManager.get_absolute_path_from_relative_path("results/calculation_results.csv")
+        df = DataManager.read_csv_data(absolute_path)
+        return df.values.tolist()
