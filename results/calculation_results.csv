@@ -1,18 +1,5 @@
-record,timestamp,input_file,operation,result
-a1a648d9-785f-49d8-a28e-061120675634,1639537985,Calculator Web App,1.0 + 1.0,2.0
-b105fb7c-452a-49b0-ace3-cd1cf2971400,1639537998,Calculator Web App,2.0 - 1.0,1.0
-d08afc2a-c4de-45cb-af14-641b38f518c7,1639538039,Calculator Web App,2.0 * 2.0,4.0
-15109762-74fa-4626-9543-2abdfa4d7669,1639538063,Calculator Web App,2.0 - 2.0,0.0
-1d571196-08c4-42a7-9e75-e1fe69e1fe0f,1639538284,Calculator Web App,4.0 * 4.0,16.0
-3b1e4361-697e-4a59-a4db-e8762016fb87,1639538788,Calculator Web App,7.0 / 7.0,1.0
-baaa1128-fab2-4f81-8edc-664cff144c22,1639538905,Calculator Web App,7.0 / 7.0,1.0
-fc8051a0-0784-4747-a59f-1d21da3260fb,1639538920,Calculator Web App,7.0 / 7.0,1.0
-178fc9e5-a25c-465d-a1f5-1d5ef8125454,1639538922,Calculator Web App,7.0 / 7.0,1.0
-df0acb53-aac4-425f-a26e-12a0afbca497,1639538955,Calculator Web App,7.0 / 7.0,1.0
-c58c6c36-030a-4c66-a100-9eadd7f2a144,1639539044,Calculator Web App,7.0 / 7.0,1.0
-1828f24d-f196-435c-882d-3d35095bc8f6,1639539142,Calculator Web App,7.0 / 7.0,1.0
-29c349cf-7ddb-43cc-a3c6-578ede2e5ac5,1639539174,Calculator Web App,7.0 / 7.0,1.0
-10cb9a06-8cd5-48dd-9388-9a8f3eebe730,1639539192,Calculator Web App,7.0 / 7.0,1.0
-de93cb11-b0c6-4efd-935d-5123c38edfb3,1639539199,Calculator Web App,7.0 / 7.0,1.0
-3a47e4f9-41a0-4396-a231-240210e2902b,1639539225,Calculator Web App,7.0 / 7.0,1.0
-99ade99f-8829-487d-9eba-26ef57da0596,1639539246,Calculator Web App,24.0 * 15.0,360.0
+record,timestamp,input_file,operation,result\
+bbc9d7e6-40ce-400c-803f-d023301b058e,1639623542,Calculator Web App,2.0 + 2.0,4.0
+2450f29f-d964-4f07-be62-4ce91bdd859f,1639623561,Calculator Web App,2.0 - 2.0,0.0
+6fda0e0c-d065-40f0-b72c-3beb10d46f38,1639623575,Calculator Web App,2.0 * 2.0 * 3.0,12.0
+7d0401b9-6113-4ec9-b0e5-a40e7209b006,1639623584,Calculator Web App,21.0 / 8.0,2.625
